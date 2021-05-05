@@ -1,0 +1,16 @@
+---
+- name: Creating Wiki directory in "{{ base_dir+wiki_dir }}"
+  file:
+    path: "{{ base_dir+wiki_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Cloning Windows tools 
+  git:
+    repo: "{{ item }}"
+    dest: "{{ base_dir+wiki_dir }}"
+    version: master
+  loop:
+    - https://github.com/carlospolop/hacktricks.git
+    - https://github.com/swisskyrepo/PayloadsAllTheThings.git
+

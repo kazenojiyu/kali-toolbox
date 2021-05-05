@@ -1,0 +1,62 @@
+---
+- name: Creating Windows Pwn directory in "{{ base_dir+pwn_win_dir }}"
+  file:
+    path: "{{ base_dir+pwn_win_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Cloning Windows Focused tools 
+  git:
+    repo: "{{ item }}"
+    dest: "{{ base_dir+pwn_win_dir }}{{ item.split('/')[-1].replace('.git','')}}"
+    version: master
+  loop:
+    - https://github.com/BloodHoundAD/BloodHound
+    - https://github.com/byt3bl33d3r/CrackMapExec
+    - https://github.com/trustedsec/unicorn
+    - https://github.com/Hackplayers/evil-winrm
+    - https://github.com/PowerShellMafia/PowerSploit.git  
+    - https://github.com/GhostPack/KeeThief
+    - https://github.com/GhostPack/Seatbelt
+    - https://github.com/GhostPack/SharpUp
+    - https://github.com/GhostPack/SafetyKatz
+    - https://github.com/GhostPack/SharpDump
+    - https://github.com/GhostPack/SharpWMI  
+    - https://github.com/GhostPack/Rubeus
+    - https://github.com/GhostPack/SharpDPAPI
+    - https://github.com/GhostPack/Lockless
+    - https://github.com/GhostPack/SharpRoast
+    - https://github.com/cobbr/PSAmsi.git
+    - https://github.com/Tylous/Limelighter
+    - https://github.com/samratashok/nishang.git
+    - https://github.com/TarlogicSecurity/kerbrute.git
+    - https://github.com/m8r0wn/ActiveReign.git
+    - https://github.com/besimorhino/powercat.git
+
+- name: Cloning Windows Focused tools  - Enumeration
+  git:
+    repo: "{{ item }}"
+    dest: "{{ base_dir+pwn_win_dir }}/enumeration/{{ item.split('/')[-1].replace('.git','')}}"
+    version: master
+  loop:
+    - https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite
+    - https://github.com/bitsadmin/wesng.git
+    - https://github.com/pentestmonkey/windows-privesc-check.git
+
+- name: Cloning Windows Refernce Material
+  git:
+    repo: "{{ item }}"
+    dest: "{{ base_dir+pwn_win_dir }}/references/{{ item.split('/')[-1].replace('.git','')}}"
+    version: master
+  loop:
+    - https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet
+
+- name: Downloading precompiled Packages
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ base_dir+pwn_win_dir }}"
+    mode: '0755'
+    checksum: "{{item.checksum}}"
+  loop:
+    - { url: 'https://download.sysinternals.com/files/SysinternalsSuite.zip', checksum: 'sha256:2904c612e162a98938f3308bb9f663f24351c23802663992a47804bc6d54b363'}
+    - { url: 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20200918-fix/mimikatz_trunk.zip', checksum: 'sha256:18560596e61eae328e75f4696a3d620b95db929bc461e0b29955df06bc114051'}

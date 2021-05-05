@@ -1,0 +1,7 @@
+base_dir: ~/tools/
+c2_dir: c2-framework/
+re_dir: reverse-engineering/
+pwn_win_dir: win_pwn/
+pwn_lin_dir: lin_pwn/
+network_dir: network/
+wiki_dir: wiki/

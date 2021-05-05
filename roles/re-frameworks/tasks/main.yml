@@ -1,0 +1,66 @@
+---
+# This playbook contains plays to grab RE frameworks/packages
+
+- name: Creating RE directory in {{ base_dir+re_dir }}
+  file:
+    path: "{{ base_dir+re_dir }}"
+    state: directory
+    mode: '0755'
+
+# IDA version list: https://www.hex-rays.com/products/ida/support/download_freeware/
+- name: "Downloading RE Frameworks (IDA & Ghidra & Cutter)"
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ base_dir+re_dir }}"
+    mode: '0755'
+    checksum: "{{ item.checksum }}"
+  loop:
+    - { url: "https://out7.hex-rays.com/files/idafree70_linux.run", checksum: 'sha256:136e0e1995f16e1ff85244c269450fa91fb5454a565ca7623712f34ac004e245'}
+    - { url: "https://ghidra-sre.org/ghidra_9.2.3_PUBLIC_20210325.zip", checksum: 'sha256:9019c78f8b38d68fd40908b040466974a370e26ba51b2aaeafc744171040f714'}
+    - { url: "https://github.com/rizinorg/cutter/releases/download/v2.0.2/Cutter-v2.0.2-x64.Linux.AppImage", checksum: 'sha256:1ce40694029852fa2c667220854d6843367c90dfe7a0225ad94e033ea4cd0cd1'}
+
+- name: Installing JDK 11+ for Ghidra
+  package:
+    name: openjdk-11-jdk-headless
+    state: latest
+  become: yes
+
+- name: Running IDA Installer
+  command: "{{ base_dir+re_dir }}idafree70_linux.run --mode unattended --prefix {{ base_dir+re_dir }}idafree --installpassword \"\" "
+
+- name: Unzipping Ghidra
+  raw: "cd {{ base_dir+re_dir }} && unzip -n ghidra*.zip"
+
+- name: PwnTools dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  loop:
+    - python3 
+    - python3-pip 
+    - python3-dev
+    - git 
+    - libssl-dev 
+    - libffi-dev
+    - build-essential
+
+- name: Installing Python bindings for capstone/unicorn/keystone/ropper/pwntools
+  pip:
+    name: "{{ item }}"
+  loop:
+    - capstone 
+    - unicorn
+    - keystone-engine
+    - ropper
+    - pwntools
+
+- name: Downloading GEF (GDB Enhanced Features) from GitHub
+  get_url: 
+    url: https://github.com/hugsy/gef/raw/master/scripts/gef.sh 
+    dest: /tmp/gef.sh
+
+- name: Installing GEF from /tmp/gef.sh.
+  script: 
+    cmd: /tmp/gef.sh
+

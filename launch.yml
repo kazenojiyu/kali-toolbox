@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  roles:
+    - c2-frameworks
+    - re-frameworks
+    - pwn-windows
+    - pwn-linux
+    - network
+    - wiki
