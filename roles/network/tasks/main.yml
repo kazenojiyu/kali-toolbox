@@ -8,7 +8,7 @@
 - name: Cloning Network tools 
   git:
     repo: "{{ item }}"
-    dest: "{{ base_dir+network_dir }}"
+    dest: "{{ base_dir+network_dir }}{{ item.split('/')[-1].replace('.git','')}}"
     version: master
   loop:
     - https://github.com/SecureAuthCorp/impacket.git
