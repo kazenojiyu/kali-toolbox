@@ -1,9 +1,15 @@
 ---
 - hosts: localhost
   roles:
-    # - c2-frameworks
-    # - re-frameworks
-    # - pwn-windows
-    # - pwn-linux
-    - network
-    - wiki
+    - role: c2-frameworks
+      tags: c2
+    - role: re-frameworks
+      tags: reverse
+    - role: pwn-windows
+      tags: windows
+    - role: pwn-linux
+      tags: linux
+    - role: network
+      tags: network
+    - role: wiki
+      tags: wiki

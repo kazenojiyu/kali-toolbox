@@ -43,14 +43,6 @@
     - https://github.com/bitsadmin/wesng.git
     - https://github.com/pentestmonkey/windows-privesc-check.git
 
-- name: Cloning Windows Refernce Material
-  git:
-    repo: "{{ item }}"
-    dest: "{{ base_dir+pwn_win_dir }}/references/{{ item.split('/')[-1].replace('.git','')}}"
-    version: master
-  loop:
-    - https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet
-
 - name: Downloading precompiled Packages
   get_url:
     url: "{{ item.url }}"

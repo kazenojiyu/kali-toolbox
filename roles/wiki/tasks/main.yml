@@ -13,4 +13,5 @@
   loop:
     - https://github.com/carlospolop/hacktricks.git
     - https://github.com/swisskyrepo/PayloadsAllTheThings.git
+    - https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet.git
 
