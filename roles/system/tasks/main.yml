@@ -1,0 +1,63 @@
+---
+- name: Add Apt signing keys
+  ansible.builtin.apt_key:
+    url: "{{ item }}"
+    state: present
+  become: yes
+  loop:
+    - https://debian.neo4j.com/neotechnology.gpg.key
+
+- name: Add specified repositories into sources list
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    state: present
+  become: yes
+  loop:
+    - "deb https://debian.neo4j.com stable 4.1"
+    - "deb http://httpredir.debian.org/debian stretch-backports main"
+
+- name: All projects dependancies
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - python3 
+    - python3-pip 
+    - python3-dev
+    - git 
+    - libssl-dev 
+    - libffi-dev
+    - build-essential
+    - neo4j
+    - golang-go
+    - openjdk-11-jdk-headless
+    - openjdk-11-jdk
+    - openjdk-11-jre
+    - nodejs
+    - npm
+
+- name: Ensure JAVA_HOME is set
+  ansible.builtin.lineinfile:
+    path: /etc/environment
+    regexp: '^JAVA_HOME='
+    line: JAVA_HOME=/usr/share/doc/openjdk-11-jre-headless/JAVA_HOME
+  become: yes
+
+- name: Enable neo4j service
+  ansible.builtin.systemd:
+    name: neo4j
+    state: started
+    enabled: yes
+  become: yes
+
+- name: neo4j interface
+  ansible.builtin.debug:
+    msg:
+    - "neo4j interface is availaible at http://localhost:7474/ with username: neo4j and password: neo4j"
+
+- name: Install npm package
+  shell: npm install -g electron-packager
+  become: true

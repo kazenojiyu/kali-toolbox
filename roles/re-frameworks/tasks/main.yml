@@ -31,20 +31,6 @@
 - name: Unzipping Ghidra
   raw: "cd {{ base_dir+re_dir }} && unzip -n ghidra*.zip"
 
-- name: PwnTools dependencies
-  package:
-    name: "{{ item }}"
-    state: latest
-  become: yes
-  loop:
-    - python3 
-    - python3-pip 
-    - python3-dev
-    - git 
-    - libssl-dev 
-    - libffi-dev
-    - build-essential
-
 - name: Installing Python bindings for capstone/unicorn/keystone/ropper/pwntools
   pip:
     name: "{{ item }}"

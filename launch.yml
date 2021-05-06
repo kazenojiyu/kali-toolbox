@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   roles:
+    - role: system
+      tags: system
     - role: c2-frameworks
       tags: c2
     - role: re-frameworks

@@ -21,12 +21,16 @@ ansible-playbook launch.yml --tags "network"
 ```
 
 Different tags are:
+- system
 - c2
 - reverse
 - windows
 - linux
 - network
 - wiki
+
+# System
+
 
 # C2 Matrix
 
@@ -83,6 +87,7 @@ List of installed tools:
 
 # Windows tools
 - [BloodHound](https://github.com/BloodHoundAD/BloodHound.git)
+- [BloodHound.py](https://github.com/fox-it/BloodHound.py)
 - [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec.git)
 - [unicorn](https://github.com/trustedsec/unicorn.git)
 - [evil-(winrm]https://github.com/Hackplayers/evil-winrm.git)
@@ -100,7 +105,7 @@ List of installed tools:
 - [PSAmsi](https://github.com/cobbr/PSAmsi.git)
 - [Limelighter](https://github.com/Tylous/Limelighter.git)
 - [nishang](https://github.com/samratashok/nishang.git)
-- [kerbrute](https://github.com/TarlogicSecurity/kerbrute.git)
+- [kerbrute](https://github.com/ropnop/kerbrute.git)
 - [ActiveReign](https://github.com/m8r0wn/ActiveReign.git)
 - [powercat](https://github.com/besimorhino/powercat.git)
 - [SysinternalsSuite](https://download.sysinternals.com/files/SysinternalsSuite.zip)

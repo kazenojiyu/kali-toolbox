@@ -29,9 +29,10 @@
     - https://github.com/cobbr/PSAmsi.git
     - https://github.com/Tylous/Limelighter
     - https://github.com/samratashok/nishang.git
-    - https://github.com/TarlogicSecurity/kerbrute.git
+    - https://github.com/ropnop/kerbrute.git
     - https://github.com/m8r0wn/ActiveReign.git
     - https://github.com/besimorhino/powercat.git
+    - https://github.com/fox-it/BloodHound.py
 
 - name: Cloning Windows Focused tools  - Enumeration
   git:
@@ -52,3 +53,6 @@
   loop:
     - { url: 'https://download.sysinternals.com/files/SysinternalsSuite.zip', checksum: 'sha256:2904c612e162a98938f3308bb9f663f24351c23802663992a47804bc6d54b363'}
     - { url: 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20200918-fix/mimikatz_trunk.zip', checksum: 'sha256:18560596e61eae328e75f4696a3d620b95db929bc461e0b29955df06bc114051'}
+
+- name: Build BloodHound GUI
+  shell: cd {{ base_dir+pwn_win_dir }}BloodHound/ && npm install && npm run linuxbuild
