@@ -24,11 +24,14 @@
   loop:
     - apt-transport-https
     - ca-certificates
+    - python-dev
     - python3 
     - python3-pip 
     - python3-dev
     - git 
-    - libssl-dev 
+    - libssl-dev
+    - libsasl2-dev
+    - libldap2-dev
     - libffi-dev
     - build-essential
     - neo4j
@@ -61,3 +64,9 @@
 - name: Install npm package
   shell: npm install -g electron-packager
   become: true
+
+- name: Installing Python requirements
+  pip:
+    name: "{{ item }}"
+  loop:
+    - python-ldap

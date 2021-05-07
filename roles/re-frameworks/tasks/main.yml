@@ -19,12 +19,6 @@
     - { url: "https://ghidra-sre.org/ghidra_9.2.3_PUBLIC_20210325.zip", checksum: 'sha256:9019c78f8b38d68fd40908b040466974a370e26ba51b2aaeafc744171040f714'}
     - { url: "https://github.com/rizinorg/cutter/releases/download/v2.0.2/Cutter-v2.0.2-x64.Linux.AppImage", checksum: 'sha256:1ce40694029852fa2c667220854d6843367c90dfe7a0225ad94e033ea4cd0cd1'}
 
-- name: Installing JDK 11+ for Ghidra
-  package:
-    name: openjdk-11-jdk-headless
-    state: latest
-  become: yes
-
 - name: Running IDA Installer
   command: "{{ base_dir+re_dir }}idafree70_linux.run --mode unattended --prefix {{ base_dir+re_dir }}idafree --installpassword \"\" "
 
