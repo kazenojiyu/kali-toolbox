@@ -70,3 +70,12 @@
     name: "{{ item }}"
   loop:
     - python-ldap
+
+- name: Installing Ruby gem
+  gem:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - winrm
+    - winrm-fs
+    - stringio
