@@ -13,11 +13,11 @@
     url: "{{ item.url }}"
     dest: "{{ base_dir+re_dir }}"
     mode: '0755'
-    checksum: "{{ item.checksum }}"
+      #checksum: "{{ item.checksum }}"
   loop:
     - { url: "https://out7.hex-rays.com/files/idafree70_linux.run", checksum: 'sha256:136e0e1995f16e1ff85244c269450fa91fb5454a565ca7623712f34ac004e245'}
-    - { url: "https://ghidra-sre.org/ghidra_9.2.3_PUBLIC_20210325.zip", checksum: 'sha256:9019c78f8b38d68fd40908b040466974a370e26ba51b2aaeafc744171040f714'}
-    - { url: "https://github.com/rizinorg/cutter/releases/download/v2.0.2/Cutter-v2.0.2-x64.Linux.AppImage", checksum: 'sha256:1ce40694029852fa2c667220854d6843367c90dfe7a0225ad94e033ea4cd0cd1'}
+    - { url: "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.2.2_build/ghidra_10.2.2_PUBLIC_20221115.zip", checksum: 'sha256:feb8a795696b406ad075e2c554c80c7ee7dd55f0952458f694ea1a918aa20ee3'}
+    - { url: "https://github.com/rizinorg/cutter/releases/download/v2.1.2/Cutter-v2.1.2-Linux-x86_64.AppImage", checksum: 'sha256:bae4420ecd2ee399e5b2da0a8f6ba92768b0fb575864aed879f2439043efda08'}
 
 - name: Running IDA Installer
   command: "{{ base_dir+re_dir }}idafree70_linux.run --mode unattended --prefix {{ base_dir+re_dir }}idafree --installpassword \"\" "
@@ -37,7 +37,7 @@
 
 - name: Downloading GEF (GDB Enhanced Features) from GitHub
   get_url: 
-    url: https://github.com/hugsy/gef/raw/master/scripts/gef.sh 
+    url: https://raw.githubusercontent.com/hugsy/gef/main/scripts/gef.sh 
     dest: /tmp/gef.sh
 
 - name: Installing GEF from /tmp/gef.sh.

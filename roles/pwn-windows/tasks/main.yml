@@ -51,8 +51,8 @@
     mode: '0755'
     checksum: "{{item.checksum}}"
   loop:
-    - { url: 'https://download.sysinternals.com/files/SysinternalsSuite.zip', checksum: 'sha256:2904c612e162a98938f3308bb9f663f24351c23802663992a47804bc6d54b363'}
-    - { url: 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20200918-fix/mimikatz_trunk.zip', checksum: 'sha256:18560596e61eae328e75f4696a3d620b95db929bc461e0b29955df06bc114051'}
+    - { url: 'https://download.sysinternals.com/files/SysinternalsSuite.zip', checksum: 'sha256:56e72eee9f3df153a702be5eeeaa3293560792d89e8824d26a182146f6e35aa9'}
+    - { url: 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip', checksum: 'sha256:7accd179e8a6b2fc907e7e8d087c52a7f48084852724b03d25bebcada1acbca5'}
 
 - name: Build BloodHound GUI
   shell: cd {{ base_dir+pwn_win_dir }}BloodHound/ && npm install && npm run linuxbuild
